@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:todo/onboard.dart';
 import 'home_page.dart';
 
 class Splashpage extends StatefulWidget {
@@ -21,14 +21,13 @@ class _SplashpageState extends State<Splashpage> {
   @override
   void initState() {
     super.initState();
-    print("Inicalizou");
     navegar();
   }
 
   void navegar() {
     Future.delayed(Duration(seconds: 5), () {
       navigatorKey.currentState?.pushReplacement(
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Onboard()),
       );
     });
   }
