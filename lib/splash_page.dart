@@ -26,9 +26,9 @@ class _SplashpageState extends State<Splashpage> {
   }
 
   void navegar() {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 1), () {
       navigatorKey.currentState?.pushReplacement(
-        MaterialPageRoute(builder: (context) => Welcome()),
+        MaterialPageRoute(builder: (context) => Onboard()),
       );
     });
   }
