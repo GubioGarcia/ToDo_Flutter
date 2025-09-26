@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo/onboard.dart';
-import 'package:todo/welcome.dart';
-import 'home_page.dart';
 
 class Splashpage extends StatefulWidget {
   const Splashpage({super.key});
