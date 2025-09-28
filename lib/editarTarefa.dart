@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'categorias.dart';
 import 'models/tarefa.dart';
 import 'widgets/common_button.dart';
 
@@ -16,6 +17,13 @@ class _EditarTarefaPageState extends State<EditarTarefaPage> {
   late TextEditingController descricaoController;
   late DateTime dataHoraSelecionada;
   late String prioridadeSelecionada;
+  String categoriaSelecionada = "Pessoal";
+  List<String> categoriasDisponiveis = [
+    "Pessoal",
+    "Trabalho",
+    "Estudos",
+    "Saúde",
+  ];
 
   @override
   void initState() {
@@ -24,6 +32,7 @@ class _EditarTarefaPageState extends State<EditarTarefaPage> {
     descricaoController = TextEditingController(text: widget.tarefa.descricao);
     dataHoraSelecionada = widget.tarefa.dataHora;
     prioridadeSelecionada = widget.tarefa.prioridade;
+    categoriaSelecionada = widget.tarefa.categoria;
   }
 
   void salvarEdicao() {
@@ -32,6 +41,7 @@ class _EditarTarefaPageState extends State<EditarTarefaPage> {
       descricao: descricaoController.text,
       dataHora: dataHoraSelecionada,
       prioridade: prioridadeSelecionada,
+      categoria: categoriaSelecionada,
     );
     Navigator.pop(context, tarefaAtualizada);
   }
@@ -106,7 +116,7 @@ class _EditarTarefaPageState extends State<EditarTarefaPage> {
             ),
             SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: prioridadeSelecionada,
+              initialValue: prioridadeSelecionada,
               items: [
                 "Alta",
                 "Média",
@@ -120,6 +130,39 @@ class _EditarTarefaPageState extends State<EditarTarefaPage> {
               ),
               dropdownColor: Colors.black,
               style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownButtonFormField<String>(
+                    initialValue: categoriaSelecionada,
+                    items: categoriasDisponiveis
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        categoriaSelecionada = value!;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Categoria",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    dropdownColor: Colors.black,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.edit, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CategoriasPage()),
+                    );
+                  },
+                ),
+              ],
             ),
             SizedBox(height: 16),
             CommonButton(

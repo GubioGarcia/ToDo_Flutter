@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'categorias.dart';
 import 'models/tarefa.dart';
 import 'widgets/common_button.dart';
 
@@ -15,6 +16,14 @@ class _AdicionarTarefaPageState extends State<AdicionarTarefaPage> {
   DateTime? dataHoraSelecionada;
   String prioridadeSelecionada = "Média";
 
+  String categoriaSelecionada = "Pessoal";
+  List<String> categoriasDisponiveis = [
+    "Pessoal",
+    "Trabalho",
+    "Estudos",
+    "Saúde",
+  ];
+
   void salvarTarefa() {
     if (tituloController.text.isEmpty || dataHoraSelecionada == null) return;
 
@@ -23,6 +32,7 @@ class _AdicionarTarefaPageState extends State<AdicionarTarefaPage> {
       descricao: descricaoController.text,
       dataHora: dataHoraSelecionada!,
       prioridade: prioridadeSelecionada,
+      categoria: categoriaSelecionada,
     );
 
     Navigator.pop(context, novaTarefa);
@@ -100,6 +110,39 @@ class _AdicionarTarefaPageState extends State<AdicionarTarefaPage> {
               ),
               dropdownColor: Colors.black,
               style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownButtonFormField<String>(
+                    initialValue: categoriaSelecionada,
+                    items: categoriasDisponiveis
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        categoriaSelecionada = value!;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Categoria",
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    dropdownColor: Colors.black,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.edit, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CategoriasPage()),
+                    );
+                  },
+                ),
+              ],
             ),
             SizedBox(height: 16),
             CommonButton(

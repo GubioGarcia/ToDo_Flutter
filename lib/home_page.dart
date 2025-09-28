@@ -95,9 +95,24 @@ class _HomePageState extends State<HomePage> {
                       tarefa.titulo,
                       style: TextStyle(color: Colors.deepPurple),
                     ),
-                    subtitle: Text(
-                      "${tarefa.descricao}\n${tarefa.dataHora} • Prioridade: ${tarefa.prioridade}",
-                      style: TextStyle(color: Colors.deepPurple),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tarefa.descricao,
+                          style: TextStyle(color: Colors.deepPurple),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "${tarefa.dataHora} • Prioridade: ${tarefa.prioridade}",
+                          style: TextStyle(color: Colors.deepPurple),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "Categoria: ${tarefa.categoria}",
+                          style: TextStyle(color: Colors.deepPurple),
+                        ),
+                      ],
                     ),
                     isThreeLine: true,
                     trailing: Row(
