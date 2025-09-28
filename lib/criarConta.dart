@@ -152,9 +152,10 @@ class _CriarcontaPageState extends State<CriarcontaPage> {
         fontSize: 16.0,
       );
 
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false,
       );
     }
   }

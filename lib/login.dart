@@ -119,9 +119,10 @@ class _LoginPageState extends State<LoginPage> {
         fontSize: 16.0,
       );
 
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false,
       );
     } else {
       Fluttertoast.showToast(
